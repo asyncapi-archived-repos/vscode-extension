@@ -1,0 +1,121 @@
+{
+  "name": "@asyncapi/vscode-extension",
+  "version": "0.1.0",
+  "description": "AsyncAPI extension for Visual Studio Code",
+  "keywords": [
+    "asyncapi"
+  ],
+  "bugs": {
+    "url": "https://github.com/asyncapi/vscode-extension/issues"
+  },
+  "repository": "https://github.com/asyncapi/vscode-extension",
+  "license": "Apache-2.0",
+  "main": "./out/src/extension",
+  "scripts": {
+    "check": "npm run check:eslint && npm run check:prettier && npm run check:tsc && npm run check:tslint",
+    "check:eslint": "eslint \"**/*\"",
+    "check:prettier": "prettier --check \"**/*.*\"",
+    "check:tsc": "tsc --project . --noEmit",
+    "check:tslint": "tslint --project .",
+    "compile": "tsc -p ./",
+    "fix": "npm run fix:eslint && npm run fix:tslint && npm run fix:prettier",
+    "fix:eslint": "eslint --fix \"**/*\"",
+    "fix:prettier": "prettier --write \"**/*.*\"",
+    "fix:tslint": "tslint --project .",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "vscode:prepublish": "npm run compile",
+    "watch": "tsc -watch -p ./"
+  },
+  "lint-staged": {
+    "**/*.*": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "asyncapi-generator": "^0.29.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.9",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^11.11.0",
+    "eslint": "^5.15.1",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "mocha": "^6.1.4",
+    "prettier": "^1.18.2",
+    "prettier-plugin-packagejson": "^2.0.1",
+    "tslint": "^5.13.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.0.3",
+    "vscode": "^1.1.30"
+  },
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "activationEvents": [
+    "onCommand:asyncapi-preview.openPreviewToTheSide"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "asyncapi-preview.openPreviewToTheSide",
+        "title": "Open Preview to the Side",
+        "category": "AsyncAPI",
+        "icon": {
+          "light": "./media/preview-right-light.svg",
+          "dark": "./media/preview-right-dark.svg"
+        }
+      },
+      {
+        "command": "asyncapi-preview.toggleLiveUpdate",
+        "title": "Toggle Live Preview Update",
+        "category": "AsyncAPI"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "asyncapi-preview.openPreviewToTheSide",
+          "when": "isAsyncAPIFile",
+          "group": "asyncapi-preview"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "asyncapi-preview.openPreviewToTheSide",
+          "when": "isAsyncAPIFile",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "AsyncAPI Preview",
+      "properties": {
+        "asyncapi-preview.liveUpdate": {
+          "description": "Re-render the preview as the contents of the source changes, without requiring the source buffer to be saved. If disabled, the preview is re-rendered only when the buffer is saved to disk.",
+          "default": true,
+          "type": "boolean"
+        },
+        "asyncapi-preview.singlePreview": {
+          "description": "Open Only One Preview.",
+          "default": true,
+          "type": "boolean"
+        },
+        "asyncapi-preview.automaticallyShowPreviewOfAsyncApiBeingEdited": {
+          "description": "Automatically show preview of AsyncAPI being edited.",
+          "default": true,
+          "type": "boolean"
+        },
+      }
+    }
+  },
+  "displayName": "AsyncAPI Preview",
+  "publisher": "asyncapi"
+}
