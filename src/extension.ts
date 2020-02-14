@@ -3,7 +3,6 @@
 import * as vscode from "vscode";
 
 import {
-  isAsyncAPIFile,
   AsyncAPIPreviewView,
 } from "./preview-content-provider";
 
@@ -49,17 +48,13 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.workspace.onDidSaveTextDocument((document) => {
-      if (isAsyncAPIFile(document)) {
-        contentProvider.update(document.uri);
-      }
+      contentProvider.update(document.uri);
     }),
   );
 
   context.subscriptions.push(
     vscode.workspace.onDidChangeTextDocument((event) => {
-      if (isAsyncAPIFile(event.document)) {
-        contentProvider.update(event.document.uri);
-      }
+      contentProvider.update(event.document.uri);
     }),
   );
 
@@ -76,37 +71,35 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor((textEditor) => {
       if (textEditor && textEditor.document && textEditor.document.uri) {
-        if (isAsyncAPIFile(textEditor.document)) {
-          const sourceUri = textEditor.document.uri;
-          const config = vscode.workspace.getConfiguration(
-            "asyncapi-preview",
-          );
-          const automaticallyShowPreviewOfAsyncApiBeingEdited = config.get<
-            boolean
-          >("automaticallyShowPreviewOfAsyncApiBeingEdited");
-          const isUsingSinglePreview = config.get<boolean>("singlePreview");
-          /**
-           * Is using single preview and the preview is on.
-           * When we switched text ed()tor, update preview to that text editor.
-           */
+        const sourceUri = textEditor.document.uri;
+        const config = vscode.workspace.getConfiguration(
+          "asyncapi-preview",
+        );
+        const automaticallyShowPreviewOfAsyncApiBeingEdited = config.get<
+          boolean
+        >("automaticallyShowPreviewOfAsyncApiBeingEdited");
+        const isUsingSinglePreview = config.get<boolean>("singlePreview");
+        /**
+         * Is using single preview and the preview is on.
+         * When we switched text ed()tor, update preview to that text editor.
+         */
 
-          if (contentProvider.isPreviewOn(sourceUri)) {
-            if (
-              isUsingSinglePreview &&
-              !contentProvider.previewHasTheSameSingleSourceUri(sourceUri)
-            ) {
-              contentProvider.initPreview(sourceUri, textEditor, {
-                viewColumn: contentProvider.getPreview(sourceUri).viewColumn,
-                preserveFocus: true,
-              });
-            } else if (
-              !isUsingSinglePreview &&
-              automaticallyShowPreviewOfAsyncApiBeingEdited
-            ) {
-              const previewPanel = contentProvider.getPreview(sourceUri);
-              if (previewPanel) {
-                previewPanel.reveal(vscode.ViewColumn.Two, true);
-              }
+        if (contentProvider.isPreviewOn(sourceUri)) {
+          if (
+            isUsingSinglePreview &&
+            !contentProvider.previewHasTheSameSingleSourceUri(sourceUri)
+          ) {
+            contentProvider.initPreview(sourceUri, textEditor, {
+              viewColumn: contentProvider.getPreview(sourceUri).viewColumn,
+              preserveFocus: true,
+            });
+          } else if (
+            !isUsingSinglePreview &&
+            automaticallyShowPreviewOfAsyncApiBeingEdited
+          ) {
+            const previewPanel = contentProvider.getPreview(sourceUri);
+            if (previewPanel) {
+              previewPanel.reveal(vscode.ViewColumn.Two, true);
             }
           }
         }

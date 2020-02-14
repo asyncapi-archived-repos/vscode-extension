@@ -268,7 +268,6 @@ export class AsyncAPIPreviewView {
         previewPanel &&
         editor &&
         editor.document &&
-        isAsyncAPIFile(editor.document) &&
         editor.document.uri &&
         editor.document.uri.fsPath === sourceUri.fsPath
       ) {
@@ -338,12 +337,4 @@ export function getPreviewUri(uri: vscode.Uri) {
     });
   }
   return previewUri;
-}
-
-export function isAsyncAPIFile(document: vscode.TextDocument) {
-  return true;
-  // return (
-  //   document.languageId === "yaml" ||
-  //   document.languageId === "json"
-  // ) && document.uri.scheme !== "asyncapi-preview"; // prevent processing of own documents
 }

@@ -82,14 +82,14 @@
       "editor/context": [
         {
           "command": "asyncapi-preview.openPreviewToTheSide",
-          "when": "isAsyncAPIFile",
+          "when": "editorLangId == yaml || editorLangId == json",
           "group": "asyncapi-preview"
         }
       ],
       "editor/title": [
         {
           "command": "asyncapi-preview.openPreviewToTheSide",
-          "when": "isAsyncAPIFile",
+          "when": "editorLangId == yaml || editorLangId == json",
           "group": "navigation"
         }
       ]
@@ -112,7 +112,7 @@
           "description": "Automatically show preview of AsyncAPI being edited.",
           "default": true,
           "type": "boolean"
-        },
+        }
       }
     }
   },
