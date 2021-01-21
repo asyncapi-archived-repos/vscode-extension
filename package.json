@@ -26,7 +26,7 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "vscode:prepublish": "npm run compile",
     "watch": "tsc -watch -p ./", 
-    "generate:assets": "npm run generate:examples",
+    "generate:assets": "echo 'No assets to generate yet'",
     "bump:version": "echo 'No automated version bump as we do not release this package yet'",
     "lint": "npm run check",
     "release": "echo 'This package is not yet released'"
