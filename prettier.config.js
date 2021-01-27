@@ -1,6 +1,6 @@
 module.exports = {
   arrowParens: "always",
-  endOfLine: "auto",
+  endOfLine: "lf",
   quoteProps: "consistent",
   trailingComma: "all",
 };
