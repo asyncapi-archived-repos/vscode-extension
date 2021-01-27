@@ -12,24 +12,24 @@
   "license": "Apache-2.0",
   "main": "./out/src/extension",
   "scripts": {
+    "bump:version": "echo 'No automated version bump as we do not release this package yet'",
     "check": "npm run check:eslint && npm run check:prettier && npm run check:tsc && npm run check:tslint",
-    "check:eslint": "eslint \"**/*\"",
+    "check:eslint": "eslint --config .eslintrc.json .",
     "check:prettier": "prettier --check \"**/*.*\"",
     "check:tsc": "tsc --project . --noEmit",
     "check:tslint": "tslint --project .",
     "compile": "tsc -p ./",
     "fix": "npm run fix:eslint && npm run fix:tslint && npm run fix:prettier",
-    "fix:eslint": "eslint --fix \"**/*\"",
+    "fix:eslint": "eslint --fix --config .eslintrc.json .",
     "fix:prettier": "prettier --write \"**/*.*\"",
-    "fix:tslint": "tslint --project .",
+    "fix:tslint": "tslint --fix --project .",
+    "generate:assets": "echo 'No assets to generate yet'",
     "postinstall": "node ./node_modules/vscode/bin/install",
+    "lint": "npm run check",
+    "release": "echo 'This package is not yet released'",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "vscode:prepublish": "npm run compile",
-    "watch": "tsc -watch -p ./", 
-    "generate:assets": "echo 'No assets to generate yet'",
-    "bump:version": "echo 'No automated version bump as we do not release this package yet'",
-    "lint": "npm run check",
-    "release": "echo 'This package is not yet released'"
+    "watch": "tsc -watch -p ./"
   },
   "lint-staged": {
     "**/*.*": [
@@ -39,7 +39,7 @@
     ]
   },
   "dependencies": {
-    "asyncapi-generator": "^0.29.1"
+    "@asyncapi/generator": "1.1.5"
   },
   "devDependencies": {
     "@types/jquery": "^3.3.9",

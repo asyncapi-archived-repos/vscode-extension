@@ -1,9 +1,9 @@
+import AsyncAPIGenerator from "@asyncapi/generator";
 import { tmpdir } from "os";
 import * as path from "path";
 import * as vscode from "vscode";
 import { Uri } from "vscode";
 import { AsyncAPIPreviewConfig } from "./config";
-const AsyncAPIGenerator = require('asyncapi-generator');
 
 export class AsyncAPIPreviewView {
   private waiting: boolean = false;
@@ -208,13 +208,13 @@ export class AsyncAPIPreviewView {
 
     const text = editor.document.getText();
 
-    const generator = new AsyncAPIGenerator('html', tmpdir(), {
-			entrypoint: 'index.html',
-      output: 'string',
+    const generator = new AsyncAPIGenerator("html", tmpdir(), {
+      entrypoint: "index.html",
+      output: "string",
       templateParams: {
-        baseHref: 'https://playground.asyncapi.io/html/template/'
+        baseHref: "https://playground.asyncapi.io/html/template/",
       },
-		});
+    });
     const html = await generator.generateFromString(text);
     previewPanel.webview.html = `<style>html, body { background-color: white; color: black; }\na:hover { color: black; }</style>\n${html}`;
   }
