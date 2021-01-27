@@ -11,10 +11,8 @@ export class AsyncAPIPreviewConfig {
   public readonly automaticallyShowPreviewOfAsyncApiBeingEdited: boolean;
 
   private constructor() {
-    const config = vscode.workspace.getConfiguration(
-      "asyncapi-preview",
-    );
-    
+    const config = vscode.workspace.getConfiguration("asyncapi-preview");
+
     this.liveUpdate = config.get<boolean>("liveUpdate");
     this.singlePreview = config.get<boolean>("singlePreview");
     this.automaticallyShowPreviewOfAsyncApiBeingEdited = config.get<boolean>(

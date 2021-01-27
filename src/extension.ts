@@ -2,9 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
-import {
-  AsyncAPIPreviewView,
-} from "./preview-content-provider";
+import { AsyncAPIPreviewView } from "./preview-content-provider";
 
 // this method is called when your extension iopenTextDocuments activated
 // your extension is activated the very first time the command is executed
@@ -27,9 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   function toggleLiveUpdate() {
-    const config = vscode.workspace.getConfiguration(
-      "asyncapi-preview",
-    );
+    const config = vscode.workspace.getConfiguration("asyncapi-preview");
     const liveUpdate = !config.get<boolean>("liveUpdate");
     config.update("liveUpdate", liveUpdate, true).then(() => {
       contentProvider.updateConfiguration();
@@ -72,9 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.onDidChangeActiveTextEditor((textEditor) => {
       if (textEditor && textEditor.document && textEditor.document.uri) {
         const sourceUri = textEditor.document.uri;
-        const config = vscode.workspace.getConfiguration(
-          "asyncapi-preview",
-        );
+        const config = vscode.workspace.getConfiguration("asyncapi-preview");
         const automaticallyShowPreviewOfAsyncApiBeingEdited = config.get<
           boolean
         >("automaticallyShowPreviewOfAsyncApiBeingEdited");
