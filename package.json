@@ -39,7 +39,7 @@
     ]
   },
   "dependencies": {
-    "@asyncapi/generator": "1.1.5"
+    "@asyncapi/generator": "^1.1.8"
   },
   "devDependencies": {
     "@types/jquery": "^3.3.9",
