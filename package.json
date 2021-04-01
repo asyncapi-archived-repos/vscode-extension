@@ -54,7 +54,7 @@
     "tslint": "^5.13.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.0.3",
-    "vscode": "^1.1.30"
+    "vscode": "^1.1.37"
   },
   "engines": {
     "vscode": "^1.30.0"
