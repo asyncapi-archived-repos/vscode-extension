@@ -1,3 +1,5 @@
+> we will work on VSCode plugin here https://github.com/asyncapi/vs-asyncapi-preview
+
 # VS Code extension for AsyncAPI
 
 > This package and README is WIP.
